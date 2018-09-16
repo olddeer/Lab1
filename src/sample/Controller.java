@@ -61,28 +61,34 @@ public class Controller {
     private String FillAreaByChlessky(){
         String s="";
         s+="Matrix A:\n";
-        for(int i=0;i<variables*variables;i++) {
+        for(int i=0,j=1;i<variables*variables;i++) {
+            if((i+1)%(variables*j)==1&&i!=0){
+                s+="\n";
+                j++;
+            }
             s += ArrayA[i]+" ";
-            if((i+1)%variables==1)
-                s+='\n';
         }
-        s+="Solve the matrix B\n";
+        s+="\n\nSolve the matrix B\n";
         s+=methodChlesky.getSolutionOfB();
         s+="Matrix B:\n";
-        for(int i=0;i<variables*variables;i++) {
+        for(int i=0,j=1;i<variables*variables;i++) {
+            if((i+1)%(variables*j)==1&&i!=0){
+                s+="\n";
+                j++;
+            }
             s += methodChlesky.getArrayB()[i]+" ";
-            if((i+1)%variables==1)
-                s+='\n';
         }
-        s+="Solve the matrix C\n";
+        s+="\n\nSolve the matrix C\n";
         s+=methodChlesky.getSolutionOfC();
         s+="Matrix C:\n";
-        for(int i=0;i<variables*variables;i++) {
+        for(int i=0,j=1;i<variables*variables;i++) {
+            if((i+1)%(variables*j)==1&&i!=0){
+                s+="\n";
+                j++;
+            }
             s += methodChlesky.getArrayC()[i]+" ";
-            if((i+1)%variables==1)
-                s+='\n';
         }
-        s+="Find the all y:\n";
+        s+="\n\nFind the all y:\n";
         s+=methodChlesky.getSolutionOfY();
         s+="Find the all x:\n";
         s+=methodChlesky.getSolutionOfX();
