@@ -57,6 +57,8 @@ public class Controller {
 
     }
 
+
+
     //Fill Soution area by Chlessky
     private String FillAreaByChlessky(){
         String s="";
