@@ -2,6 +2,16 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Controller {
     //Field for input data
@@ -57,7 +67,76 @@ public class Controller {
 
     }
 
+    @FXML
+    private void SaveAndOpenReport(){
+        if (!isNotNumberAndEmpty()) //Checking a field for is not number and empty
+            if(!isAllRadioButtonsOff(Cholesky,Gauss)) //Checking a radiobuttons for being selected
+                if(Cholesky.isSelected()) //My method is chosen
+                {
+                    FillArrays();
+                    methodChlesky = new MethodChlesky(ArrayA, ArrayD);
+                    if (methodChlesky.isZeroDiagonal())
+                        Message("Method Chlesky demands no zero from a main diagonal");
+                    else if (methodChlesky.isZeroMinor())
+                        Message("Method Chlesky demands no zero from the minors of a main diagonal");
+                    else {
+                        methodChlesky.DoMethod();
+                        String Head = "<html>\n" +
+                                "<head>\n" +
+                                "\t<title>Report</title>\n" +
+                                "</head>\n" +
+                                "<body>\n" +
+                                "<h1 align=\"center\">Method Cholesky</h1>\n" +
+                                "<hr>\n" +
+                                "<h2> The converted system of equations in the matrix</h2>" +
+                                "<pre>"+FillAreaByChlessky() +"</pre>"+
+                                "</body>\n" +
+                                "</html>";
+                        FileChooser fileChooser = getFileChooserHtmL("Save Report");
+                        File file;
+                        if ((file = fileChooser.showSaveDialog(null)) != null) {
+                            try {
+                                try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                                    bw.write(Head);
+                                    bw.close();
+                                    file.getCanonicalPath();
+                                    try {
+                                        Desktop.getDesktop().browse(file.toURI());
+                                    } catch (IOException e) {
+                                        Message("Sorry, but can't open a theory about Chlesky.\nPlease, try one more time.");
+                                    }
+                                }
+                            } catch (IOException e) {
+                                Message("Sorry, but can't save the report. Please, try one more time.");
+                            }
+                        }
+                    }
+                }else{ //Your method is chosen
 
+                }
+    }
+
+    public static FileChooser getFileChooserHtmL(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("."));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html"));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("All files (*.*)", "*.*"));
+        fileChooser.setTitle(title);
+        return fileChooser;
+    }
+
+    //Open theory Cholesky
+    @FXML
+    private void OpenTheoryAboutCholesky(){
+        File file = new File("D:\\Учеба\\3_course\\Численные методы\\Lab1\\Programm\\Lab1\\src\\sample\\About.htm");
+        try {
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (IOException e) {
+            Message("Sorry, but can't open a theory about Chlesky.\nPlease, try one more time.");
+        }
+    }
 
     //Fill Soution area by Chlessky
     private String FillAreaByChlessky(){
@@ -68,7 +147,7 @@ public class Controller {
                 s+="\n";
                 j++;
             }
-            s += ArrayA[i]+" ";
+            s +=  Math.round(ArrayA[i])+" ";
         }
         s+="\n\nSolve the matrix B\n";
         s+=methodChlesky.getSolutionOfB();
@@ -78,7 +157,7 @@ public class Controller {
                 s+="\n";
                 j++;
             }
-            s += methodChlesky.getArrayB()[i]+" ";
+            s +=  Math.round(methodChlesky.getArrayB()[i])+" ";
         }
         s+="\n\nSolve the matrix C\n";
         s+=methodChlesky.getSolutionOfC();
@@ -88,7 +167,7 @@ public class Controller {
                 s+="\n";
                 j++;
             }
-            s += methodChlesky.getArrayC()[i]+" ";
+            s +=  Math.round(methodChlesky.getArrayC()[i])+" ";
         }
         s+="\n\nFind the all y:\n";
         s+=methodChlesky.getSolutionOfY();

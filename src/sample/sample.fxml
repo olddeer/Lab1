@@ -184,22 +184,22 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button fx:id="SolveButn" mnemonicParsing="false" onAction="#ActionForSolution" prefHeight="39.0" prefWidth="138.0" text="Solve">
+                                          <Button fx:id="SolveButn" mnemonicParsing="false" onAction="#ActionForSolution" prefHeight="39.0" prefWidth="153.0" text="Solve">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="PrintButn" mnemonicParsing="false" prefHeight="39.0" prefWidth="138.0" text="Print" GridPane.columnIndex="1">
+                                          <Button fx:id="PrintButn" mnemonicParsing="false"  onAction="#SaveAndOpenReport" prefHeight="39.0" prefWidth="146.0" text="Report" GridPane.columnIndex="1">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="AboutButn" mnemonicParsing="false" text="About method" GridPane.rowIndex="1">
+                                          <Button fx:id="AboutButnCholesky" mnemonicParsing="false" onAction="#OpenTheoryAboutCholesky" text="Method Cholesky" GridPane.rowIndex="1">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button mnemonicParsing="false" text="About method" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="151.0" text="About method" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
