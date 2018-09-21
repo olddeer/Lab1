@@ -135,8 +135,9 @@ public class Controller {
             Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e) {
             Message("Sorry, but can't open a theory about Chlesky.\nPlease, try one more time.");
-        }
     }
+    }
+
 
     //Fill Soution area by Chlessky
     private String FillAreaByChlessky(){
@@ -147,7 +148,7 @@ public class Controller {
                 s+="\n";
                 j++;
             }
-            s +=  Math.round(ArrayA[i])+" ";
+            s +=  round(ArrayA[i])+" ";
         }
         s+="\n\nSolve the matrix B\n";
         s+=methodChlesky.getSolutionOfB();
@@ -157,7 +158,7 @@ public class Controller {
                 s+="\n";
                 j++;
             }
-            s +=  Math.round(methodChlesky.getArrayB()[i])+" ";
+            s += round(methodChlesky.getArrayB()[i])+" ";
         }
         s+="\n\nSolve the matrix C\n";
         s+=methodChlesky.getSolutionOfC();
@@ -167,7 +168,7 @@ public class Controller {
                 s+="\n";
                 j++;
             }
-            s +=  Math.round(methodChlesky.getArrayC()[i])+" ";
+            s +=  round(methodChlesky.getArrayC()[i])+" ";
         }
         s+="\n\nFind the all y:\n";
         s+=methodChlesky.getSolutionOfY();
@@ -250,5 +251,15 @@ public class Controller {
         alert.setHeaderText("Please, follow the instructions below!");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private String round(double d){
+        if(d==0.0)
+            return String.valueOf(0);
+        d=d*100;
+        int i = (int)d;
+        d=(double)i;
+        d=d/100;
+        return String.valueOf(d);
     }
 }

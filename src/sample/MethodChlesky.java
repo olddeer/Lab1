@@ -112,11 +112,11 @@ public class MethodChlesky {
         for(int k=1;k<=il;k++) {
             if(k!=il) {
                 SolutionOfB += "b(" + i + k + ")*c(" + k + j + ")+";
-                SolutionOfB_1+=bacMin(Math.round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(Math.round(ArrayC[Ilteratol(k, j)]))+"+";
+                SolutionOfB_1+=bacMin(round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(round(ArrayC[Ilteratol(k, j)]))+"+";
             }
             else {
                 SolutionOfB += "b(" + i + k + ")*c(" + k + j + ")";
-                SolutionOfB_1+=bacMin(Math.round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(Math.round(ArrayC[Ilteratol(k, j)]));
+                SolutionOfB_1+=bacMin(round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(round(ArrayC[Ilteratol(k, j)]));
             }
             result += ArrayB[Ilteratol(i, k)] * ArrayC[Ilteratol(k, j)];
         }
@@ -128,11 +128,11 @@ public class MethodChlesky {
         for(int k=1;k<=il;k++) {
             if(k!=il) {
                 SolutionOfC += "b(" + i + k + ")*c(" + k + j + ")+";
-                SolutionOfB_1+=bacMin(Math.round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(Math.round(ArrayC[Ilteratol(k, j)]))+"+";
+                SolutionOfB_1+=bacMin(round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(round(ArrayC[Ilteratol(k, j)]))+"+";
             }
             else {
                 SolutionOfC += "b(" + i + k + ")*c(" + k + j + ")";
-                SolutionOfB_1+=bacMin(Math.round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(Math.round(ArrayC[Ilteratol(k, j)]));
+                SolutionOfB_1+=bacMin(round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin(round(ArrayC[Ilteratol(k, j)]));
             }
             result += ArrayB[Ilteratol(i, k)] * ArrayC[Ilteratol(k, j)];
         }
@@ -144,29 +144,29 @@ public class MethodChlesky {
             for (int j = 1; j <= number_of_variables; j++) {
                 if(j==1) {
                     ArrayB[Ilteratol(i, j)] =ArrayA[Ilteratol(i, j)];
-                    SolutionOfB+="b("+i+j+")=a("+i+j+")= "+ Math.round(ArrayB[Ilteratol(i, j)])+"\n";
+                    SolutionOfB+="b("+i+j+")=a("+i+j+")= "+ round(ArrayB[Ilteratol(i, j)])+"\n";
                 }
                 if(i==1) {
                     ArrayC[Ilteratol(i, j)] = ArrayA[Ilteratol(i, j)] / ArrayB[0];
-                    SolutionOfC+="c("+i+j+")=a("+i+j+")/b(11)= "+ Math.round(ArrayA[Ilteratol(i, j)])+"/"+
-                            bacMin( Math.round(ArrayB[0]))+"= "+ Math.round(ArrayC[Ilteratol(i, j)])+"\n";
+                    SolutionOfC+="c("+i+j+")=a("+i+j+")/b(11)= "+ round(ArrayA[Ilteratol(i, j)])+"/"+
+                            bacMin( round(ArrayB[0]))+"= "+ round(ArrayC[Ilteratol(i, j)])+"\n";
                 }
                 if(j==i) {
                     ArrayC[Ilteratol(i, j)] = 1;
-                    SolutionOfC+="c("+i+j+")= "+  Math.round(ArrayC[Ilteratol(i, j)])+"\n";
+                    SolutionOfC+="c("+i+j+")= "+  round(ArrayC[Ilteratol(i, j)])+"\n";
                 }
                 if(i>=j&&j>1) {
                     SolutionOfB+="b("+i+j+")=a("+i+j+")-(";
                     ArrayB[Ilteratol(i, j)] = ArrayA[Ilteratol(i, j)] - SumOfLineForB(i, j, j - 1);
-                    SolutionOfB+=")="+ Math.round(ArrayA[Ilteratol(i, j)])+"-("+SolutionOfB_1+")="+
-                            Math.round(ArrayB[Ilteratol(i, j)])+"\n";
+                    SolutionOfB+=")="+ round(ArrayA[Ilteratol(i, j)])+"-("+SolutionOfB_1+")="+
+                            round(ArrayB[Ilteratol(i, j)])+"\n";
                     SolutionOfB_1="";
                 }
                 if(1<i&&i<j) {
                     SolutionOfC+="c("+i+j+")=(1/b("+i+i+"))*(a("+i+j+")-(";
                     ArrayC[Ilteratol(i, j)] = (1 / ArrayB[Ilteratol(i, i)]) * (ArrayA[Ilteratol(i, j)] - SumOfLineForC(i, j, i - 1));
-                    SolutionOfC+="))=1/"+bacMin( Math.round(ArrayA[Ilteratol(i, j)]))+"-("+SolutionOfB_1+")="+
-                            Math.round(ArrayC[Ilteratol(i, j)])+"\n";
+                    SolutionOfC+="))=1/"+bacMin( round(ArrayA[Ilteratol(i, j)]))+"-("+SolutionOfB_1+")="+
+                            round(ArrayC[Ilteratol(i, j)])+"\n";
                     SolutionOfB_1 = "";
                 }
             }
@@ -220,10 +220,10 @@ public class MethodChlesky {
         for(int k=1;k<=il;k++) {
             if(k!=il) {
                 SolutionOfY += "b(" + i + k + ")*y" + k + "+";
-                SolutionOfB_1+=bacMin( Math.round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin( Math.round(ArrayResultSet[k - 1]))+"+";
+                SolutionOfB_1+=bacMin( round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin( round(ArrayResultSet[k - 1]))+"+";
             }else{
                 SolutionOfY += "b(" + i + k + ")*y" + k;
-                SolutionOfB_1+=bacMin( Math.round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin( Math.round(ArrayResultSet[k - 1]));
+                SolutionOfB_1+=bacMin( round(ArrayB[Ilteratol(i, k)]))+"*"+bacMin( round(ArrayResultSet[k - 1]));
             }
             result += ArrayB[Ilteratol(il+1, k)] * ArrayResultSet[k - 1];
         }
@@ -235,43 +235,53 @@ public class MethodChlesky {
         for(int k=1+i;k<=number_of_variables;k++) {
             if(k!=number_of_variables) {
                 SolutionOfX += "c(" + i + k + ")*x" + k + "+";
-                SolutionOfB_1+=bacMin( Math.round(ArrayC[Ilteratol(i, k)]))+"*"+
-                        bacMin( Math.round(ArrayResultSet[number_of_variables + k - 1]))+"+";
+                SolutionOfB_1+=bacMin( round(ArrayC[Ilteratol(i, k)]))+"*"+
+                        bacMin( round(ArrayResultSet[number_of_variables + k - 1]))+"+";
             }else{
                 SolutionOfX += "c(" + i + k + ")*x" + k ;
-                SolutionOfB_1+=bacMin( Math.round(ArrayC[Ilteratol(i, k)]))+"*"+
-                        bacMin( Math.round(ArrayResultSet[number_of_variables + k - 1]));
+                SolutionOfB_1+=bacMin( round(ArrayC[Ilteratol(i, k)]))+"*"+
+                        bacMin( round(ArrayResultSet[number_of_variables + k - 1]));
             }
             result += ArrayC[Ilteratol(i, k)] * ArrayResultSet[number_of_variables + k - 1];
         }
         return result;
     }
 
-    private Object bacMin(double tmp){
-        if(tmp<0)
-            return "("+ Math.round(tmp)+")";
-        return  Math.round(tmp);
+    private Object bacMin(String tmp){
+        if(Double.valueOf(tmp)<0)
+            return "("+ tmp+")";
+        return tmp;
     }
     public void DoMethod(){
         this.InitializeArrays();
         SolutionOfY+="y1=d(1)/b(11)= ";
         ArrayResultSet[0]= ArrayD[0]/ArrayB[0];
-        SolutionOfY+= Math.round(ArrayResultSet[0])+"\n";
+        SolutionOfY+= round(ArrayResultSet[0])+"\n";
         for(int i=2;i<=number_of_variables;i++) {
             SolutionOfY+="y"+i+"=(1/b("+i+i+"))*(d("+i+")-(";
             ArrayResultSet[i - 1] = (1 / ArrayB[Ilteratol(i, i)]) * (ArrayD[i - 1] - SumForResultY(i - 1,i));
-            SolutionOfY+=")= "+"(1/"+ bacMin( Math.round(ArrayB[Ilteratol(i, i)]))+")*("+  Math.round(ArrayD[i - 1])
-                    +"-("+SolutionOfB_1+"))= "+ Math.round(ArrayResultSet[i - 1])+"\n";
+            SolutionOfY+=")= "+"(1/"+ bacMin( round(ArrayB[Ilteratol(i, i)]))+")*("+  round(ArrayD[i - 1])
+                    +"-("+SolutionOfB_1+"))= "+ round(ArrayResultSet[i - 1])+"\n";
             SolutionOfB_1="";
         }
         ArrayResultSet[2*number_of_variables-1]=ArrayResultSet[number_of_variables-1];
-        SolutionOfX+="x3=y3= "+  Math.round(ArrayResultSet[2*number_of_variables-1])+"\n";
+        SolutionOfX+="x3=y3= "+  round(ArrayResultSet[2*number_of_variables-1])+"\n";
         for(int i=number_of_variables-1;i>=1;i--) {
             SolutionOfX+="x"+i+"=y"+i+"-(";
             ArrayResultSet[number_of_variables + i - 1] = ArrayResultSet[i - 1] - SumForResultX(i);
-            SolutionOfX+=")= "+ Math.round(ArrayResultSet[i - 1])+"-("+SolutionOfB_1+
-                    ")= "+ Math.round(ArrayResultSet[number_of_variables + i - 1])+"\n";
+            SolutionOfX+=")= "+ round(ArrayResultSet[i - 1])+"-("+SolutionOfB_1+
+                    ")= "+ round(ArrayResultSet[number_of_variables + i - 1])+"\n";
             SolutionOfB_1="";
         }
+    }
+
+    private String round(double d){
+        if(d==0.0)
+            return String.valueOf(0);
+        d=d*100;
+        int i = (int)d;
+        d=(double)i;
+        d=d/100;
+      return String.valueOf(d);
     }
 }
