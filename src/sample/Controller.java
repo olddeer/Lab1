@@ -61,8 +61,8 @@ public class Controller {
                             SolutionAre.setText(FillAreaByChlessky());
 
                         }
-                }else{ //Your method is chosen
-
+                }else{
+                    SolutionAre.setText(solveEquationByGaussSeidel());
                 }
 
     }
@@ -71,8 +71,6 @@ public class Controller {
     private void SaveAndOpenReport(){
         if (!isNotNumberAndEmpty()) //Checking a field for is not number and empty
             if(!isAllRadioButtonsOff(Cholesky,Gauss)) //Checking a radiobuttons for being selected
-                if(Cholesky.isSelected()) //My method is chosen
-                {
                     FillArrays();
                     methodChlesky = new MethodChlesky(ArrayA, ArrayD);
                     if (methodChlesky.isZeroDiagonal())
@@ -81,6 +79,7 @@ public class Controller {
                         Message("Method Chlesky demands no zero from the minors of a main diagonal");
                     else {
                         methodChlesky.DoMethod();
+
                         String Head = "<html>\n" +
                                 "<head>\n" +
                                 "\t<title>Report</title>\n" +
@@ -89,9 +88,14 @@ public class Controller {
                                 "<h1 align=\"center\">Method Cholesky</h1>\n" +
                                 "<hr>\n" +
                                 "<h2> The converted system of equations in the matrix</h2>" +
-                                "<pre>"+FillAreaByChlessky() +"</pre>"+
-                                "</body>\n" +
-                                "</html>";
+                                "<pre>"+FillAreaByChlessky() +"</pre>" +
+                            "<h1 align=\"center\">Method Gauss Seidel</h1>\n" +
+                            "<hr>\n" +
+                            "<h2>Solution</h2>" +
+                            "<pre>"+solveEquationByGaussSeidel() +"</pre>"+
+                            "</body>\n" +
+                            "</html>";
+
                         FileChooser fileChooser = getFileChooserHtmL("Save Report");
                         File file;
                         if ((file = fileChooser.showSaveDialog(null)) != null) {
@@ -111,10 +115,8 @@ public class Controller {
                             }
                         }
                     }
-                }else{ //Your method is chosen
-
                 }
-    }
+
 
     public static FileChooser getFileChooserHtmL(String title) {
         FileChooser fileChooser = new FileChooser();
@@ -130,14 +132,44 @@ public class Controller {
     //Open theory Cholesky
     @FXML
     private void OpenTheoryAboutCholesky(){
-        File file = new File("D:\\Учеба\\3_course\\Численные методы\\Lab1\\Programm\\Lab1\\src\\sample\\About.htm");
+        File file = new File("src/sample/About.htm");
         try {
             Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e) {
             Message("Sorry, but can't open a theory about Chlesky.\nPlease, try one more time.");
     }
+
     }
 
+    @FXML
+    private  void OpenTheoryAboutGaussSeidel(){
+
+        File file = new File("src/sample/GaussSeidel.pdf");
+        try {
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+            Message("Sorry, but can't open a theory about Gauss Seidel.\nPlease, try one more time.");
+        }
+    }
+
+    private  String solveEquationByGaussSeidel(){
+        FillArrays();
+        double [][]M = new double[ArrayD.length][ArrayD.length+1];
+        for (int i=0,h=0;i<M.length;i++){
+            for (int j= 0;j<M.length;j++){
+                M[i][j] = ArrayA[h];
+                h++;
+            }
+            M[i][M.length]=ArrayD[i];
+        }
+        GaussSeidel gaussSeidel = new GaussSeidel(M);
+        gaussSeidel.solve();
+        StringBuilder sb = new StringBuilder();
+        sb.append(gaussSeidel.getArrayB());
+        sb.append(gaussSeidel.getArrayX());
+        return sb.toString();
+    }
 
     //Fill Soution area by Chlessky
     private String FillAreaByChlessky(){
