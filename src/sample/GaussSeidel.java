@@ -30,39 +30,6 @@ public class GaussSeidel {
         return bd.doubleValue();
     }
 
-    private void matrixToTriangle(double[][] A) { // Search for maximum in this column
-        int n = A.length;
-        for (int i = 0; i < n; i++) {
-
-            double maxEl = abs(A[i][i]);
-            int maxRow = i;
-            for (int k = i + 1; k < n; k++) {
-                if (abs(A[k][i]) > maxEl) {
-                    maxEl = abs(A[k][i]);
-                    maxRow = k;
-                }
-            }
-
-            for (int k = i; k < n + 1; k++) {   // Swap maximum row with current row (column by column)
-                double tmp = A[maxRow][k];
-                A[maxRow][k] = A[i][k];
-                A[i][k] = tmp;
-            }
-
-            // Make all rows below this one 0 in current column
-            for (int k = i + 1; k < n; k++) {
-                double c = round(-A[k][i] / A[i][i], 3);
-                for (int j = i; j < n + 1; j++) {
-                    if (i == j) {
-                        A[k][j] = 0;
-                    } else {
-                        A[k][j] = round(A[k][j] + c * A[i][j], 3);
-                    }
-                }
-            }
-        }
-
-    }
 
     public void print() {
         int n = M.length;
@@ -143,7 +110,7 @@ public class GaussSeidel {
     }
 
     public double[] solve() {
-        matrixToTriangle(M);
+
         int iterations = 0;
         print();
         int n = M.length;
