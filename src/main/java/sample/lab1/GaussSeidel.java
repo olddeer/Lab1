@@ -1,4 +1,4 @@
-package sample;
+package sample.lab1;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -14,7 +14,7 @@ public class GaussSeidel {
     private StringBuilder arrayX;
 
 
-    public GaussSeidel(double[][] matrix) {
+    public  GaussSeidel(double[][] matrix) {
         M = matrix;
         arrayX = new StringBuilder();
         arrayB = new StringBuilder();
@@ -33,9 +33,9 @@ public class GaussSeidel {
 
     public void print() {
         int n = M.length;
-        for (int i = 0; i < n; i++) {
+        for (double[] aM : M) {
             for (int j = 0; j < n + 1; j++) {
-                System.out.print(M[i][j] + " ");
+                System.out.print(aM[j] + " ");
             }
             System.out.println();
 
@@ -128,12 +128,21 @@ public class GaussSeidel {
                 if (j != i) {
                     c = round(-(M[i][j])/M[i][i],3);
 
-                    arrayX.append("c_" + (i+1)+""+(j+1) + " ="+c+ " \n");
+                    arrayX.append("c_")
+                        .append(i + 1)
+                        .append(j + 1)
+                        .append(" =")
+                        .append(c)
+                        .append(" \n");
 
                 }
             }
             d = round(sum  /M[i][i], 3);
-            arrayX.append("d_" + (i+1) + " ="+d+ " \n");
+            arrayX.append("d_")
+                .append(i + 1)
+                .append(" =")
+                .append(d)
+                .append(" \n");
             // Update x_i to use in the next row calculation
 
             X[i] = round(1 / M[i][i] * sum, 3);
@@ -141,22 +150,35 @@ public class GaussSeidel {
         }
 
         while (true) {
-            arrayX.append("Iteration " + (iterations+1) + " :\n");
+            arrayX.append("Iteration ")
+                .append(iterations + 1)
+                .append(" :\n");
             for (int i = 0; i < n; i++) {
-                arrayX.append("x_"+(i+1)+"= ");
+                arrayX.append("x_")
+                    .append(i + 1)
+                    .append("= ");
                 double sum = M[i][n]; // b_n
 
                 for (int j = 0; j < n; j++) {
 
                     if (j != i) {
                         sum = round(sum - M[i][j] * X[j], 3);
-                        arrayX.append("+c_" + (i+1)+""+(j+1) + "*X"+(j+1)+ " + ");
+                        arrayX.append("+c_")
+                            .append(i + 1)
+                            .append(j + 1)
+                            .append("*X")
+                            .append(j + 1)
+                            .append(" + ");
                     }
                 }
                 // Update x_i to use in the next row calculation
 
                 X[i] = round(1 / M[i][i] * sum, 3);
-                arrayX.append("d_"+(i+1)+" ="+ X[i]+"\n");
+                arrayX.append("d_")
+                    .append(i + 1)
+                    .append(" =")
+                    .append(X[i])
+                    .append("\n");
 
             }
             iterations++;
