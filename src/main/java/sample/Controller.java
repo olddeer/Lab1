@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,6 +18,9 @@ import java.io.IOException;
 import sample.lab1.GaussSeidel;
 import sample.lab1.MethodChlesky;
 import sample.lab2.DihotomyMethodSolver;
+import sample.lab2.Displayer;
+import sample.lab2.FunctionDisplayer;
+import sample.lab2.IntervalDisplayer;
 
 public class Controller {
     //Field for input data
@@ -138,15 +143,29 @@ public class Controller {
         return fileChooser;
     }
 
+    private void display(Set<Displayer> set, TextArea area){
+      StringBuilder builder = new StringBuilder();
+        for (Displayer displayer: set){
+            builder.append(displayer.display())
+            .append("\n");
+        }
+        area.setText(builder.toString());
+    }
+
     @FXML
     public void SolveEquationLab2(ActionEvent actionEvent) {
-            if(DichotomyRadio.isSelected())
+        FunctionDisplayer functionDisplayer = new FunctionDisplayer();
+        IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
+        if(DichotomyRadio.isSelected())
             {
-                DihotomyMethodSolver methodSolver = new DihotomyMethodSolver(FunctionField.getText());
-
-                    Lab2Area.setText(methodSolver.solve()+"");
-
-
+                DihotomyMethodSolver methodSolver =
+                    new DihotomyMethodSolver(FunctionField.getText(),
+                    functionDisplayer,intervalDisplayer);
+                methodSolver.solve();
+                LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
+                displayers.add(intervalDisplayer);
+                displayers.add(functionDisplayer);
+                display(displayers,Lab2Area);
             }else{
                 //SolutionAre.setText(solveEquationByGaussSeidel());
             }
@@ -155,7 +174,8 @@ public class Controller {
     //Open theory Cholesky
     @FXML
     private void OpenTheoryAboutCholesky(){
-        File file = new File("src/sample/lab1/AboutMethodChlesky.htm");
+        File file =
+            new File("src/sample/lab1/AboutMethodChlesky.htm");
         try {
             Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e) {

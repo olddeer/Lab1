@@ -1,11 +1,8 @@
 package sample.lab2;
 
-import static java.lang.Math.abs;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import org.mariuszgromada.math.mxparser.Argument;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.Function;
@@ -22,13 +19,15 @@ public class FunctionIntervalBuilder {
     private List<RootDerivativeSignFunctionPair> rootSignFunctionPairs;
     private  List<RootDerivativeSignFunctionPair> foolRootSignFunctionPairs;
     private List<FunctionInterval> functionIntervals;
+    private IntervalDisplayer intervalDisplayer;
 
-    public FunctionIntervalBuilder(String functionExpression) {
+    public FunctionIntervalBuilder(String functionExpression, IntervalDisplayer displayer) {
         this.functionExpression = functionExpression;
         f = new Function("f", this.functionExpression, "x");
+        foolRootSignFunctionPairs = new ArrayList<>();
         rootSignFunctionPairs = new ArrayList<>();
         functionIntervals = new LinkedList<>();
-        foolRootSignFunctionPairs = new ArrayList<>();
+        intervalDisplayer = displayer;
     }
 
     public List<FunctionInterval> getFunctionIntervals() {
@@ -66,7 +65,7 @@ public class FunctionIntervalBuilder {
 
     private boolean checkIntervalIsChanged(RootDerivativeSignFunctionPair pair1,
         RootDerivativeSignFunctionPair pair2){
-        return pair1.isSignOfFunctionChanged() != pair2.isSignOfFunctionChanged();
+        return pair1.isSignOfFunction() != pair2.isSignOfFunction();
     }
 
     private FunctionIntervalBuilder addDerivativeRoots(){
@@ -79,9 +78,11 @@ public class FunctionIntervalBuilder {
             Double.valueOf(DERIVATIVE_MAX),
             0.1);
         for (double x: values){
-            RootDerivativeSignFunctionPair pair = new RootDerivativeSignFunctionPair(x,checkSign(x));
+            RootDerivativeSignFunctionPair pair =
+                new RootDerivativeSignFunctionPair(x,checkSign(x));
             if(!rootSignFunctionPairs.contains(pair))
-            rootSignFunctionPairs.add(pair);
+            {   intervalDisplayer.addRoot(pair);
+                rootSignFunctionPairs.add(pair);}
         }
 
         return this;
@@ -95,15 +96,22 @@ public class FunctionIntervalBuilder {
     private FunctionIntervalBuilder addBoundMinRoot(){
         Expression expressionMin = new Expression("f("+MIN_BOUND+")",f);
         double minusBoundRoot = expressionMin.calculate();
-        foolRootSignFunctionPairs.add(new RootDerivativeSignFunctionPair(minusBoundRoot,checkSign(minusBoundRoot)));
+        RootDerivativeSignFunctionPair minimumRoot =
+            new RootDerivativeSignFunctionPair(minusBoundRoot,
+            checkSign(minusBoundRoot));
+        foolRootSignFunctionPairs.add(minimumRoot);
+        intervalDisplayer.setMinBound(minimumRoot);
         return this;
     }
+
     private FunctionIntervalBuilder addBoundMaxRoot(){
         Expression expressionMax = new Expression("f("+MAX_BOUND+")",f);
         double maxBoundRoot = expressionMax.calculate();
         foolRootSignFunctionPairs.addAll(rootSignFunctionPairs);
-        foolRootSignFunctionPairs.add(new RootDerivativeSignFunctionPair(maxBoundRoot,checkSign(maxBoundRoot)));
-
+        RootDerivativeSignFunctionPair maxRoot = new RootDerivativeSignFunctionPair(maxBoundRoot,
+            checkSign(maxBoundRoot));
+        foolRootSignFunctionPairs.add(maxRoot);
+        intervalDisplayer.setMaxBound(maxRoot);
         return this;
     }
 
