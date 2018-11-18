@@ -6,15 +6,15 @@ import java.util.Objects;
 public class RootDerivativeSignFunctionPair implements Comparable<RootDerivativeSignFunctionPair> {
 
     private Double value;
-    private boolean isSignOfFunctionChanged;
+    private boolean signOfFunction;
 
-    public RootDerivativeSignFunctionPair(Double value, boolean isSignOfFunctionChanged) {
+    public RootDerivativeSignFunctionPair(Double value, boolean signOfFunction) {
         this.value = value;
-        this.isSignOfFunctionChanged = isSignOfFunctionChanged;
+        this.signOfFunction = signOfFunction;
     }
 
-    public boolean isSignOfFunctionChanged() {
-        return isSignOfFunctionChanged;
+    public boolean isSignOfFunction() {
+        return signOfFunction;
     }
 
     public Double getValue() {
@@ -30,13 +30,13 @@ public class RootDerivativeSignFunctionPair implements Comparable<RootDerivative
             return false;
         }
         RootDerivativeSignFunctionPair pair = (RootDerivativeSignFunctionPair) o;
-        return isSignOfFunctionChanged == pair.isSignOfFunctionChanged &&
+        return signOfFunction == pair.signOfFunction &&
             Objects.equals(value, pair.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, isSignOfFunctionChanged);
+        return Objects.hash(value, signOfFunction);
     }
 
     @Override
