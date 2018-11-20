@@ -18,20 +18,17 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-  minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
-  xmlns="http://javafx.com/javafx/8" fx:controller="sample.Controller">
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="1.7976931348623157E308"/>
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="568.0"
-      vgrow="SOMETIMES"/>
+    <RowConstraints maxHeight="1.7976931348623157E308" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="568.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <children>
-    <TabPane GridPane.rowIndex="1" prefHeight="200.0" prefWidth="200.0"
-      tabClosingPolicy="UNAVAILABLE">
+    <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
       <tabs>
         <Tab text="Lab1">
           <content>
@@ -39,206 +36,173 @@
               <items>
                 <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                   <items>
-                    <SplitPane dividerPositions="0.41208791208791207, 0.6648351648351648"
-                      orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <SplitPane dividerPositions="0.41208791208791207, 0.6648351648351648" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                       <items>
                         <GridPane prefHeight="727.0" prefWidth="1089.0">
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0"
-                              prefWidth="100.0"/>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
-                              vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
-                              vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
-                              vgrow="SOMETIMES"/>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
-                            <TextField promptText="0" fx:id="variableX11"/>
-                            <TextField GridPane.rowIndex="1" promptText="0" fx:id="variableX21"/>
-                            <TextField GridPane.rowIndex="2" promptText="0" fx:id="variableX31"/>
-                            <TextField GridPane.columnIndex="2" promptText="0" fx:id="variableX12"/>
-                            <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" promptText="0"
-                              fx:id="variableX22"/>
-                            <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" promptText="0"
-                              fx:id="variableX32"/>
-                            <TextField GridPane.columnIndex="4" promptText="0" fx:id="variableX13"/>
-                            <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" promptText="0"
-                              fx:id="variableX23"/>
-                            <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" promptText="0"
-                              fx:id="variableX33"/>
-                            <TextField GridPane.columnIndex="7" promptText="0" fx:id="variableD1"/>
-                            <TextField GridPane.columnIndex="7" GridPane.rowIndex="1" promptText="0"
-                              fx:id="variableD2"/>
-                            <TextField GridPane.columnIndex="7" GridPane.rowIndex="2" promptText="0"
-                              fx:id="variableD3"/>
-                            <Label GridPane.columnIndex="1" text="X1+">
+                            <TextField fx:id="variableX11" promptText="0" />
+                            <TextField fx:id="variableX21" promptText="0" GridPane.rowIndex="1" />
+                            <TextField fx:id="variableX31" promptText="0" GridPane.rowIndex="2" />
+                            <TextField fx:id="variableX12" promptText="0" GridPane.columnIndex="2" />
+                            <TextField fx:id="variableX22" promptText="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                            <TextField fx:id="variableX32" promptText="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                            <TextField fx:id="variableX13" promptText="0" GridPane.columnIndex="4" />
+                            <TextField fx:id="variableX23" promptText="0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                            <TextField fx:id="variableX33" promptText="0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                            <TextField fx:id="variableD1" promptText="0" GridPane.columnIndex="7" />
+                            <TextField fx:id="variableD2" promptText="0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                            <TextField fx:id="variableD3" promptText="0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                            <Label text="X1+" GridPane.columnIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="1" GridPane.rowIndex="1" text="X1+">
+                            <Label text="X1+" GridPane.columnIndex="1" GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="1" GridPane.rowIndex="2" text="X1+">
+                            <Label text="X1+" GridPane.columnIndex="1" GridPane.rowIndex="2">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="3" GridPane.rowIndex="2" text="X2+">
+                            <Label text="X2+" GridPane.columnIndex="3" GridPane.rowIndex="2">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="3" GridPane.rowIndex="1" text="X2+">
+                            <Label text="X2+" GridPane.columnIndex="3" GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="3" text="X2+">
+                            <Label text="X2+" GridPane.columnIndex="3">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="5" text="X3">
+                            <Label text="X3" GridPane.columnIndex="5">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="5" GridPane.rowIndex="1" text="X3">
+                            <Label text="X3" GridPane.columnIndex="5" GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="5" GridPane.rowIndex="2" text="X3">
+                            <Label text="X3" GridPane.columnIndex="5" GridPane.rowIndex="2">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="6" text="=">
+                            <Label text="=" GridPane.columnIndex="6">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="6" GridPane.rowIndex="1" text="=">
+                            <Label text="=" GridPane.columnIndex="6" GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
-                            <Label GridPane.columnIndex="6" GridPane.rowIndex="2" text="=">
+                            <Label text="=" GridPane.columnIndex="6" GridPane.rowIndex="2">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Label>
                           </children>
                         </GridPane>
                         <GridPane>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER"
-                              vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
-                            <RadioButton GridPane.rowIndex="1" mnemonicParsing="false"
-                              text="by Cholesky decomposition " fx:id="Cholesky">
+                            <RadioButton fx:id="Cholesky" mnemonicParsing="false" text="by Cholesky decomposition " GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                               <GridPane.margin>
-                                <Insets left="5.0"/>
+                                <Insets left="5.0" />
                               </GridPane.margin>
                               <opaqueInsets>
-                                <Insets/>
+                                <Insets />
                               </opaqueInsets>
                               <toggleGroup>
-                                <ToggleGroup fx:id="method"/>
+                                <ToggleGroup fx:id="method" />
                               </toggleGroup>
                             </RadioButton>
-                            <RadioButton GridPane.rowIndex="2" mnemonicParsing="false"
-                              text="by Gauss Seidel method" toggleGroup="$method"
-                              fx:id="Gauss">
+                            <RadioButton fx:id="Gauss" mnemonicParsing="false" text="by Gauss Seidel method" toggleGroup="$method" GridPane.rowIndex="2">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                               <GridPane.margin>
-                                <Insets left="5.0"/>
+                                <Insets left="5.0" />
                               </GridPane.margin>
                               <opaqueInsets>
-                                <Insets/>
+                                <Insets />
                               </opaqueInsets>
                             </RadioButton>
                             <Label text="Solve the system of equations ">
                               <font>
-                                <Font size="19.0"/>
+                                <Font size="19.0" />
                               </font>
                               <GridPane.margin>
-                                <Insets left="50.0"/>
+                                <Insets left="50.0" />
                               </GridPane.margin>
                             </Label>
                           </children>
                         </GridPane>
                         <GridPane>
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
-                              prefWidth="100.0"/>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
-                              prefWidth="100.0"/>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
-                            <Button mnemonicParsing="false" onAction="#ActionForSolution"
-                              prefHeight="39.0" prefWidth="153.0" text="Solve"
-                              fx:id="SolveButn">
+                            <Button fx:id="SolveButn" mnemonicParsing="false" onAction="#ActionForSolution" prefHeight="39.0" prefWidth="153.0" text="Solve">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Button>
-                            <Button GridPane.columnIndex="1" mnemonicParsing="false"
-                              onAction="#SaveAndOpenReport" prefHeight="39.0" prefWidth="146.0"
-                              text="Report" fx:id="PrintButn">
+                            <Button fx:id="PrintButn" mnemonicParsing="false" onAction="#SaveAndOpenReport" prefHeight="39.0" prefWidth="146.0" text="Report" GridPane.columnIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Button>
-                            <Button GridPane.rowIndex="1" mnemonicParsing="false"
-                              onAction="#OpenTheoryAboutCholesky" text="Method Cholesky"
-                              fx:id="AboutButnCholesky">
+                            <Button fx:id="AboutButnCholesky" mnemonicParsing="false" onAction="#OpenTheoryAboutCholesky" text="Method Cholesky" GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Button>
-                            <Button GridPane.columnIndex="1" GridPane.rowIndex="1"
-                              mnemonicParsing="false" onAction="#OpenTheoryAboutGaussSeidel"
-                              prefHeight="39.0" prefWidth="151.0"
-                              text="About method Gauss Seidel" fx:id="c">
+                            <Button fx:id="c" mnemonicParsing="false" onAction="#OpenTheoryAboutGaussSeidel" prefHeight="39.0" prefWidth="151.0" text="About method Gauss Seidel" GridPane.columnIndex="1" GridPane.rowIndex="1">
                               <font>
-                                <Font size="18.0"/>
+                                <Font size="18.0" />
                               </font>
                             </Button>
                           </children>
@@ -249,15 +213,13 @@
                 </SplitPane>
                 <GridPane prefHeight="775.0" prefWidth="643.0">
                   <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   </columnConstraints>
                   <rowConstraints>
-                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0"
-                      prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                    <TextArea editable="false" prefHeight="200.0" prefWidth="200.0"
-                      promptText="Here will be your solution" fx:id="SolutionAre"/>
+                    <TextArea fx:id="SolutionAre" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Here will be your solution" />
                   </children>
                 </GridPane>
               </items>
@@ -270,22 +232,26 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>
-                    <RadioButton fx:id="DichotomyRadio" layoutX="59.0" layoutY="216.0" mnemonicParsing="false"
-                      text="Dichotomy method" toggleGroup="$method">
+                    <RadioButton fx:id="DichotomyRadio" layoutX="59.0" layoutY="216.0" mnemonicParsing="false" text="Dichotomy method" toggleGroup="$method">
                     </RadioButton>
-                    <RadioButton fx:id="LiovaMethodRadio" layoutX="226.0" layoutY="216.0"
-                      mnemonicParsing="false" text="Liova method" toggleGroup="$method">
+                    <RadioButton fx:id="LiovaMethodRadio" layoutX="226.0" layoutY="216.0" mnemonicParsing="false" text="Combination method" toggleGroup="$method">
                     </RadioButton>
-                    <Label layoutX="133.0" layoutY="133.0" text="Enter functionExpression"/>
-                    <TextField fx:id="FunctionField" layoutX="94.0" layoutY="170.0"/>
-                    <Button fx:id="SolveButton" layoutX="153.0" layoutY="244.0" onAction="#SolveEquationLab2" mnemonicParsing="false"
-                      text="Solve"/>
+                    <Label layoutX="133.0" layoutY="133.0" text="Enter functionExpression" />
+                    <TextField fx:id="FunctionField" layoutX="124.0" layoutY="177.0" />
+                    <Button fx:id="SolveButton" layoutX="61.0" layoutY="273.0" mnemonicParsing="false" onAction="#SolveEquationLab2" prefHeight="25.0" prefWidth="305.0" text="Solve" />
+                              <Label layoutX="135.0" layoutY="245.0" text="a">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="222.0" layoutY="245.0" text="b" />
+                              <TextField fx:id="aFroLab2" layoutX="161.0" layoutY="241.0" prefHeight="25.0" prefWidth="45.0" />
+                              <TextField fx:id="bForLab2" layoutX="242.0" layoutY="241.0" prefHeight="25.0" prefWidth="44.0" />
                   </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>
-                    <TextArea fx:id="Lab2Area" layoutY="-3.0" prefHeight="542.0" prefWidth="372.0"
-                      text="Here will be solution&#10;"/>
+                    <TextArea fx:id="Lab2Area" layoutY="-3.0" prefHeight="542.0" prefWidth="372.0" text="Here will be solution&#10;" />
                   </children>
                 </AnchorPane>
               </items>
@@ -298,17 +264,17 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="Close"/>
+            <MenuItem mnemonicParsing="false" text="Close" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem mnemonicParsing="false" text="Delete"/>
+            <MenuItem mnemonicParsing="false" text="Delete" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About"/>
+            <MenuItem mnemonicParsing="false" text="About" />
           </items>
         </Menu>
       </menus>

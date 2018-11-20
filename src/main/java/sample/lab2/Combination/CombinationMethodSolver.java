@@ -2,27 +2,24 @@ package sample.lab2.Combination;
 
 import org.mariuszgromada.math.mxparser.Function;
 import sample.lab2.FunctionInterval;
-import sample.lab2.FunctionIntervalBuilder;
-import sample.lab2.IntervalDisplayer;
 
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 public class CombinationMethodSolver {
 
-    private List<FunctionInterval> intervals;
+    private FunctionInterval interval;
     private Function function;
     private Function2Displayer functionDisplayer;
 
     public CombinationMethodSolver(String expression,
                                    Function2Displayer functionDisplayer,
-                                   IntervalDisplayer intervalDisplayer) {
+                                   FunctionInterval interval) {
         this.functionDisplayer = functionDisplayer;
-        FunctionIntervalBuilder builder =
-                new FunctionIntervalBuilder(expression, intervalDisplayer);
         function = new Function("f", expression, "x");
-        intervals = builder.build();
+        this.interval = interval;
     }
 
     private Double func(Double x) {
@@ -61,9 +58,7 @@ public class CombinationMethodSolver {
 
     public Set<Double> solve() {
         Set<Double> roots = new LinkedHashSet<>();
-        for (FunctionInterval interval : intervals) {
-            roots.add(solve(interval));
-        }
+        roots.add(solve(interval));
         functionDisplayer.setRoots(roots);
         return roots;
     }
@@ -71,28 +66,42 @@ public class CombinationMethodSolver {
     private Double solve(FunctionInterval interval) {
         double a = interval.getA();
         double b = interval.getB();
-        Set<Boolean> signs = new LinkedHashSet<>();
+        List<Boolean> signs = new LinkedList<>();
         Set<Double> lefts = new LinkedHashSet<>();
         Set<Double> rights = new LinkedHashSet<>();
+        List<Double> x = new LinkedList<>();
+        List<Double> derivate1 = new LinkedList<>();
+        List<Double> derivate2 = new LinkedList<>();
         double prom;
         double left = a;
         double right = b;
-        prom=(left+right)/2;
         do {
+            prom = (left + right) / 2;
             if (check(prom)) {
                 signs.add(check(prom));
-                left = positiveA(left,right);
-                right =posiriveB(right);
+                left = positiveA(left, right);
+                right = posiriveB(right);
                 lefts.add(left);
                 rights.add(right);
+                x.add(prom);
+                derivate1.add(derivate(prom));
+                derivate2.add(derivate2(prom));
             } else {
+                x.add(prom);
                 signs.add(check(prom));
-                left = negativeB(left,right);
-                right =negativeA(left);
+                left = negativeA(left);
+                right = negativeB(left, right);
                 lefts.add(left);
                 rights.add(right);
+                x.add(prom);
+                derivate1.add(derivate(prom));
+                derivate2.add(derivate2(prom));
             }
-        } while (Math.abs(right-left) > 0.001);
+        } while (Math.abs(right - left) > 0.001);
+        prom = (left + right) / 2;
+        functionDisplayer.addX(x);
+        functionDisplayer.addDerivate1(derivate1);
+        functionDisplayer.addDerivate2(derivate2);
         functionDisplayer.addSigns(signs);
         functionDisplayer.addLeft(lefts);
         functionDisplayer.addRights(rights);

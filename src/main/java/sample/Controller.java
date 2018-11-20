@@ -19,12 +19,9 @@ import java.io.IOException;
 
 import sample.lab1.GaussSeidel;
 import sample.lab1.MethodChlesky;
+import sample.lab2.*;
 import sample.lab2.Combination.CombinationMethodSolver;
 import sample.lab2.Combination.Function2Displayer;
-import sample.lab2.DihotomyMethodSolver;
-import sample.lab2.Displayer;
-import sample.lab2.FunctionDisplayer;
-import sample.lab2.IntervalDisplayer;
 
 public class Controller {
     //Field for input data
@@ -55,6 +52,8 @@ public class Controller {
     public TextArea SolutionAre;
     public TextArea Lab2Area;
     final int variables = 3; //number of variables which user needs to find
+    public TextField aFroLab2;
+    public TextField bForLab2;
     double ArrayA[] = new double[variables * variables]; // Array of input data of the coefficients
     double ArrayD[] = new double[variables]; // Array of input data
     //
@@ -157,9 +156,9 @@ public class Controller {
 
     @FXML
     public void SolveEquationLab2(ActionEvent actionEvent) {
-        FunctionDisplayer functionDisplayer = new FunctionDisplayer();
-        IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
         if (DichotomyRadio.isSelected()) {
+            FunctionDisplayer functionDisplayer = new FunctionDisplayer();
+            IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
             DihotomyMethodSolver methodSolver =
                     new DihotomyMethodSolver(FunctionField.getText(),
                             functionDisplayer, intervalDisplayer);
@@ -171,10 +170,9 @@ public class Controller {
         } else {
             Function2Displayer function2Displayer = new Function2Displayer();
             CombinationMethodSolver methodSolver = new CombinationMethodSolver(FunctionField.getText(),
-                    function2Displayer, intervalDisplayer);
+                    function2Displayer, new FunctionInterval(Double.parseDouble(aFroLab2.getText()),Double.parseDouble(bForLab2.getText())));
             methodSolver.solve();
             LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
-            displayers.add(intervalDisplayer);
             displayers.add(function2Displayer);
             display(displayers, Lab2Area);
         }
