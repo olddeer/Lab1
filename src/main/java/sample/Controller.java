@@ -51,6 +51,8 @@ public class Controller {
     public TextArea SolutionAre;
     public TextArea Lab2Area;
     final int variables = 3; //number of variables which user needs to find
+    public TextField from;
+    public TextField to;
     double ArrayA []= new double[variables*variables]; // Array of input data of the coefficients
     double ArrayD []= new double[variables]; // Array of input data
     //
@@ -155,15 +157,15 @@ public class Controller {
     @FXML
     public void SolveEquationLab2(ActionEvent actionEvent) {
         FunctionDisplayer functionDisplayer = new FunctionDisplayer();
-        IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
         if(DichotomyRadio.isSelected())
             {
+                Double a = Double.parseDouble(from.getText());
+                Double b = Double.parseDouble(to.getText());
                 DihotomyMethodSolver methodSolver =
                     new DihotomyMethodSolver(FunctionField.getText(),
-                    functionDisplayer,intervalDisplayer);
+                    functionDisplayer,a,b);
                 methodSolver.solve();
                 LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
-                displayers.add(intervalDisplayer);
                 displayers.add(functionDisplayer);
                 display(displayers,Lab2Area);
             }else{
