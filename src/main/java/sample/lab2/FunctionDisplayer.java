@@ -21,16 +21,19 @@ public class FunctionDisplayer implements Displayer {
     public void setRoots(Set<Double> roots) {
         this.roots = roots;
     }
+
     public void addLeft(Set<Double> left) {
-       lefts.add(left);
+        lefts.add(left);
     }
+
     public void addRights(Set<Double> right) {
         rights.add(right);
     }
+
     private void setLeftsRights(Iterator<Double> left,
-        Iterator<Double> right,
-        StringBuilder builder){
-        while (left.hasNext() && right.hasNext()){
+                                Iterator<Double> right,
+                                StringBuilder builder) {
+        while (left.hasNext() && right.hasNext()) {
             builder.append("left = ").append(left.next()).append("\n");
             builder.append("right = ").append(right.next()).append("\n");
         }
@@ -41,23 +44,23 @@ public class FunctionDisplayer implements Displayer {
         StringBuilder builder = new StringBuilder();
         Iterator<Set<Double>> leftIterator = lefts.iterator();
         Iterator<Set<Double>> rightIterator = rights.iterator();
-
         int i = 0;
-        if(roots!=null){
-        for (Double root : roots) {
-         setLeftsRights(leftIterator.next().iterator(),
-             rightIterator.next().iterator(), builder);
-            builder.append("x_")
-                .append(i)
-                .append("=")
-                .append(root)
-                .append("\n");
+        if (roots != null) {
+            for (Double root : roots) {
+                setLeftsRights(leftIterator.next().iterator(),
+                        rightIterator.next().iterator(), builder);
+                builder.append("x_")
+                        .append(i)
+                        .append("=")
+                        .append(root)
+                        .append("\n");
                 i++;
-        }}
-        else
-        {
+            }
+        } else {
             builder.append("No roots");
         }
         return builder.toString();
     }
+
+
 }

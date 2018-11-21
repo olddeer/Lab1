@@ -152,7 +152,7 @@
                                                 <ToggleGroup fx:id="method" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton fx:id="Gauss" mnemonicParsing="false" text="by Your method" toggleGroup="$method" GridPane.rowIndex="2">
+                                          <RadioButton fx:id="Gauss" mnemonicParsing="false" text="by Gauss Seidel method" toggleGroup="$method" GridPane.rowIndex="2">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -194,12 +194,12 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button fx:id="AboutButnCholesky" mnemonicParsing="false" onAction="#OpenTheoryAboutCholesky" text="Method Cholesky" GridPane.rowIndex="1">
+                                          <Button fx:id="AboutButnCholesky"  mnemonicParsing="false" onAction="#OpenTheoryAboutCholesky" text="Method Cholesky" GridPane.rowIndex="1">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
                                           </Button>
-                                          <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="151.0" text="About method" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <Button fx:id="c" mnemonicParsing="false" prefHeight="39.0" onAction="#OpenTheoryAboutGaussSeidel" prefWidth="151.0" text="About method Gauss Seidel" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
