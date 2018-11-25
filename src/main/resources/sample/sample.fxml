@@ -232,9 +232,14 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                   <children>
-                    <RadioButton fx:id="DichotomyRadio" layoutX="59.0" layoutY="216.0" mnemonicParsing="false" text="Dichotomy method" toggleGroup="$method">
+                    <TextField fx:id="from" layoutX="120.0" layoutY="200.0" text="From" maxWidth="50"/>
+                    <TextField fx:id="to" layoutX="220.0" layoutY="200.0" text="To" maxWidth="50"/>
+                    <RadioButton fx:id="DichotomyRadio" layoutX="59.0" layoutY="230.0" mnemonicParsing="false"
+                      text="Dichotomy method" toggleGroup="$method">
                     </RadioButton>
-                    <RadioButton fx:id="LiovaMethodRadio" layoutX="226.0" layoutY="216.0" mnemonicParsing="false" text="Combination method" toggleGroup="$method">
+                    <RadioButton fx:id="LiovaMethodRadio" layoutX="226.0" layoutY="230.0"
+                      mnemonicParsing="false" text="Liova method" toggleGroup="$method">
+
                     </RadioButton>
                     <Label layoutX="133.0" layoutY="133.0" text="Enter functionExpression" />
                     <TextField fx:id="FunctionField" layoutX="47.0" layoutY="177.0" prefHeight="25.0" prefWidth="334.0" />

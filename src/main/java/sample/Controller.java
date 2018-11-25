@@ -52,10 +52,11 @@ public class Controller {
     public TextArea SolutionAre;
     public TextArea Lab2Area;
     final int variables = 3; //number of variables which user needs to find
-    public TextField aFroLab2;
-    public TextField bForLab2;
-    double ArrayA[] = new double[variables * variables]; // Array of input data of the coefficients
-    double ArrayD[] = new double[variables]; // Array of input data
+    public TextField from;
+    public TextField to;
+    double ArrayA []= new double[variables*variables]; // Array of input data of the coefficients
+    double ArrayD []= new double[variables]; // Array of input data
+
     //
     MethodChlesky methodChlesky;
 
@@ -75,7 +76,6 @@ public class Controller {
                     else {
                         methodChlesky.DoMethod();
                         SolutionAre.setText(FillAreaByChlessky());
-
                     }
                 } else {
                     SolutionAre.setText(solveEquationByGaussSeidel());
@@ -159,18 +159,19 @@ public class Controller {
         if (DichotomyRadio.isSelected()) {
             FunctionDisplayer functionDisplayer = new FunctionDisplayer();
             IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
-            DihotomyMethodSolver methodSolver =
+               Double a = Double.parseDouble(from.getText());
+               Double b = Double.parseDouble(to.getText());
+                DihotomyMethodSolver methodSolver =
                     new DihotomyMethodSolver(FunctionField.getText(),
-                            functionDisplayer, intervalDisplayer);
-            methodSolver.solve();
-            LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
-            displayers.add(intervalDisplayer);
-            displayers.add(functionDisplayer);
-            display(displayers, Lab2Area);
+                    functionDisplayer,a,b);
+                methodSolver.solve();
+                LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
+                displayers.add(functionDisplayer);
+                display(displayers,Lab2Area);
         } else {
             Function2Displayer function2Displayer = new Function2Displayer();
             CombinationMethodSolver methodSolver = new CombinationMethodSolver(FunctionField.getText(),
-                    function2Displayer, new FunctionInterval(Double.parseDouble(aFroLab2.getText()),Double.parseDouble(bForLab2.getText())));
+                    function2Displayer, new FunctionInterval(Double.parseDouble(from.getText()),Double.parseDouble(to.getText())));
             methodSolver.solve();
             LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
             displayers.add(function2Displayer);
@@ -335,7 +336,7 @@ public class Controller {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+  
     private String round(double d) {
         if (d == 0.0)
             return String.valueOf(0);

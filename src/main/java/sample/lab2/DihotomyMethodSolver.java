@@ -1,5 +1,6 @@
 package sample.lab2;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,12 +15,11 @@ public class DihotomyMethodSolver {
 
     public DihotomyMethodSolver(String expression,
         FunctionDisplayer functionDisplayer,
-        IntervalDisplayer intervalDisplayer) {
+        Double a, Double b) {
         this.functionDisplayer = functionDisplayer;
-        FunctionIntervalBuilder builder =
-            new FunctionIntervalBuilder(expression, intervalDisplayer);
         function = new Function("f", expression, "x");
-        intervals = builder.build();
+        intervals = new ArrayList<>();
+        intervals.add(new FunctionInterval(a,b));
     }
 
     public Set<Double> solve() {
