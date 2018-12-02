@@ -1,6 +1,8 @@
 package sample;
 
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javafx.event.ActionEvent;
@@ -22,6 +24,8 @@ import sample.lab1.MethodChlesky;
 import sample.lab2.*;
 import sample.lab2.Combination.CombinationMethodSolver;
 import sample.lab2.Combination.Function2Displayer;
+import sample.lab3.FaddeevLeVerrier;
+import sample.lab3.FaddeevLeVerrierDisplayer;
 
 public class Controller {
     //Field for input data
@@ -54,8 +58,19 @@ public class Controller {
     final int variables = 3; //number of variables which user needs to find
     public TextField from;
     public TextField to;
-    double ArrayA []= new double[variables*variables]; // Array of input data of the coefficients
-    double ArrayD []= new double[variables]; // Array of input data
+    public TextArea lab3TextArea;
+    public TextField lab3A11;
+    public TextField lab3A12;
+    public TextField lab3A13;
+    public TextField lab3A21;
+    public TextField lab3A22;
+    public TextField lab3A23;
+    public TextField lab3A31;
+    public TextField lab3A32;
+    public TextField lab3A33;
+    public RadioButton Lab3Mathod2;
+    double ArrayA[] = new double[variables * variables]; // Array of input data of the coefficients
+    double ArrayD[] = new double[variables]; // Array of input data
 
     //
     MethodChlesky methodChlesky;
@@ -159,19 +174,19 @@ public class Controller {
         if (DichotomyRadio.isSelected()) {
             FunctionDisplayer functionDisplayer = new FunctionDisplayer();
             IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
-               Double a = Double.parseDouble(from.getText());
-               Double b = Double.parseDouble(to.getText());
-                DihotomyMethodSolver methodSolver =
+            Double a = Double.parseDouble(from.getText());
+            Double b = Double.parseDouble(to.getText());
+            DihotomyMethodSolver methodSolver =
                     new DihotomyMethodSolver(FunctionField.getText(),
-                    functionDisplayer,a,b);
-                methodSolver.solve();
-                LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
-                displayers.add(functionDisplayer);
-                display(displayers,Lab2Area);
+                            functionDisplayer, a, b);
+            methodSolver.solve();
+            LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
+            displayers.add(functionDisplayer);
+            display(displayers, Lab2Area);
         } else {
             Function2Displayer function2Displayer = new Function2Displayer();
             CombinationMethodSolver methodSolver = new CombinationMethodSolver(FunctionField.getText(),
-                    function2Displayer, new FunctionInterval(Double.parseDouble(from.getText()),Double.parseDouble(to.getText())));
+                    function2Displayer, new FunctionInterval(Double.parseDouble(from.getText()), Double.parseDouble(to.getText())));
             methodSolver.solve();
             LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
             displayers.add(function2Displayer);
@@ -336,7 +351,7 @@ public class Controller {
         alert.setContentText(message);
         alert.showAndWait();
     }
-  
+
     private String round(double d) {
         if (d == 0.0)
             return String.valueOf(0);
@@ -347,4 +362,30 @@ public class Controller {
         return String.valueOf(d);
     }
 
+    @FXML
+    public void solveEquationLab3(ActionEvent actionEvent) {
+        if(Lab3Mathod2.isSelected()) {
+            List<Double> matrixA = this.getMatrixALab3();
+            FaddeevLeVerrierDisplayer displayer = new FaddeevLeVerrierDisplayer();
+            FaddeevLeVerrier faddeevLeVerrier = new FaddeevLeVerrier(matrixA);
+            faddeevLeVerrier.solve(displayer);
+            lab3TextArea.setText(displayer.display());
+        }else{
+            
+        }
+    }
+
+    private List<Double> getMatrixALab3() {
+        List<Double> matrixA = new LinkedList<>();
+        matrixA.add(Double.valueOf(lab3A11.getText()));
+        matrixA.add(Double.valueOf(lab3A12.getText()));
+        matrixA.add(Double.valueOf(lab3A13.getText()));
+        matrixA.add(Double.valueOf(lab3A21.getText()));
+        matrixA.add(Double.valueOf(lab3A22.getText()));
+        matrixA.add(Double.valueOf(lab3A23.getText()));
+        matrixA.add(Double.valueOf(lab3A31.getText()));
+        matrixA.add(Double.valueOf(lab3A32.getText()));
+        matrixA.add(Double.valueOf(lab3A33.getText()));
+        return matrixA;
+    }
 }
