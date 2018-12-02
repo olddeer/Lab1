@@ -1,18 +1,39 @@
 package sample.lab3;
 
-import sample.lab2.Displayer;
-
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Класс, кторый испольщ=зуетс для нахождения собственных значений
+ */
 public class FaddeevLeVerrier {
+    /**
+     * Список элемнтов входной матрицы
+     */
     List<Double> inputMatrixA;
+    /**
+     * Список отображения елементов матрицы Аn на каждом этапе ильтерации
+     */
     List<Double> matrixA;
+    /**
+     * Список отображения елементов матрицы Bn на каждом этапе ильтерации
+     */
     List<Double> matrixB;
+    /**
+     * Очерь отображения коэффициэнтов матрицы А на каждом этапе ильтерации
+     */
     Deque<Double> coefficients;
+    /**
+     * Список отображений корней уровнений
+     */
     List<Double> roots;
 
+    /**
+     * Конструктор для иницыализации полей класса
+     *
+     * @param matrixA - список элементов исходной матрицы
+     */
     public FaddeevLeVerrier(List<Double> matrixA) {
         this.matrixA = new LinkedList<>();
         this.matrixB = new LinkedList<>();
@@ -21,6 +42,9 @@ public class FaddeevLeVerrier {
         this.roots = new LinkedList<>();
     }
 
+    /**
+     * Метод для пересчета матрицы Bn
+     */
     private void calculateB() {
         List<Double> resultMatrix = new LinkedList<>();
         for (int i = 0, k = 0; i < 9; k++)
@@ -33,6 +57,9 @@ public class FaddeevLeVerrier {
         matrixB.addAll(resultMatrix);
     }
 
+    /**
+     * Метод для пересчета матрицы Аn
+     */
     private void calculateA() {
         if (!matrixB.isEmpty()) {
             List<Double> resultMatrix = new LinkedList<>();
@@ -50,6 +77,11 @@ public class FaddeevLeVerrier {
         } else matrixA.addAll(inputMatrixA);
     }
 
+    /**
+     * Метод для нахождения коэффициэнтов матрицы А
+     *
+     * @param numberOfStep - этап ильтерации
+     */
     private void calculateCoefficients(int numberOfStep) {
         double sumMainElements = 0;
         for (int i = 0, k = 0; i < 9; k++) {
@@ -61,6 +93,11 @@ public class FaddeevLeVerrier {
         coefficients.addLast(sumMainElements / numberOfStep);
     }
 
+    /**
+     * Метод для записи елементов матрицы А к умножению
+     *
+     * @return - готовая матрица к умнодению
+     */
     private double[][] initializeMatrixA() {
         double[][] A = new double[3][3];
         for (int i = 0, k = 0; i < 3; i++)
@@ -69,6 +106,11 @@ public class FaddeevLeVerrier {
         return A;
     }
 
+    /**
+     * Метод для записи елементов матрицы B к умножению
+     *
+     * @return - готовая матрица к умнодению
+     */
     private double[][] initializeMatrixB() {
         double[][] B = new double[3][3];
         for (int i = 0, k = 0; i < 3; i++)
@@ -77,6 +119,11 @@ public class FaddeevLeVerrier {
         return B;
     }
 
+    /**
+     * Метод который решает Метод Леверье-Фадеева
+     *
+     * @param displayer - класс для отображение ходов ильтерации.
+     */
     public void solve(FaddeevLeVerrierDisplayer displayer) {
         for (int i = 1; i <= 3; i++) {
             this.calculateA();
@@ -114,6 +161,9 @@ public class FaddeevLeVerrier {
         return (1.0 / 3.0) * (1.0 / Math.sinh(Math.abs(R) / Math.sqrt(Math.sqrt(Q * Q * Q))));
     }
 
+    /**
+     * Метод который находит собственные значения.
+     */
     private void findRooots() {
         double a = -1 * coefficients.pop();
         double b = -1 * coefficients.pop();

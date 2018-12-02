@@ -371,7 +371,7 @@ public class Controller {
             faddeevLeVerrier.solve(displayer);
             lab3TextArea.setText(displayer.display());
         }else{
-            
+
         }
     }
 
