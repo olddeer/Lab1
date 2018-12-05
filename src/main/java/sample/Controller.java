@@ -1,33 +1,41 @@
 package sample;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import sample.lab1.GaussSeidel;
 import sample.lab1.MethodChlesky;
-import sample.lab2.*;
 import sample.lab2.Combination.CombinationMethodSolver;
 import sample.lab2.Combination.Function2Displayer;
+import sample.lab2.DihotomyMethodSolver;
+import sample.lab2.Displayer;
+import sample.lab2.FunctionDisplayer;
+import sample.lab2.FunctionInterval;
+import sample.lab2.IntervalDisplayer;
 import sample.lab3.FaddeevLeVerrier;
 import sample.lab3.FaddeevLeVerrierDisplayer;
+import sample.lab3.KrylovMethodDisplayer;
+import sample.lab3.KrylovMethodSolver;
+import sample.lab3.KrylovMethodSolverVector;
+import sample.lab3.KrylovMethodSolverVectorDisplayer;
 
 public class Controller {
+
+    final int variables = 3; //number of variables which user needs to find
     //Field for input data
     public TextField variableX11;
     public TextField variableX12;
@@ -42,7 +50,6 @@ public class Controller {
     public TextField variableD2;
     public TextField variableD3;
     public TextField FunctionField;
-
     //Radiobuttons for chosen method
     public RadioButton Cholesky;//
     public RadioButton Gauss;
@@ -55,7 +62,6 @@ public class Controller {
     //Thare will be a solution
     public TextArea SolutionAre;
     public TextArea Lab2Area;
-    final int variables = 3; //number of variables which user needs to find
     public TextField from;
     public TextField to;
     public TextArea lab3TextArea;
@@ -75,57 +81,76 @@ public class Controller {
     //
     MethodChlesky methodChlesky;
 
+    public static FileChooser getFileChooserHtmL(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("."));
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html"));
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("All files (*.*)", "*.*"));
+        fileChooser.setTitle(title);
+        return fileChooser;
+    }
 
     @FXML //Action for the button "Solve"
     private void ActionForSolution() {
         if (!isNotNumberAndEmpty()) //Checking a field for is not number and empty
+        {
             if (isAllRadioButtonsOff(Cholesky, Gauss)) //Checking a radiobuttons for being selected
+            {
                 if (Cholesky.isSelected()) //My method is chosen
                 {
                     FillArrays();
                     methodChlesky = new MethodChlesky(ArrayA, ArrayD);
-                    if (methodChlesky.isZeroDiagonal())
+                    if (methodChlesky.isZeroDiagonal()) {
                         Message("Method Chlesky demands no zero from a main diagonal");
-                    else if (methodChlesky.isZeroMinor())
-                        Message("Method Chlesky demands no zero from the minors of a main diagonal");
-                    else {
+                    } else if (methodChlesky.isZeroMinor()) {
+                        Message(
+                            "Method Chlesky demands no zero from the minors of a main diagonal");
+                    } else {
                         methodChlesky.DoMethod();
                         SolutionAre.setText(FillAreaByChlessky());
                     }
                 } else {
                     SolutionAre.setText(solveEquationByGaussSeidel());
                 }
+            }
+        }
 
     }
 
     @FXML
     private void SaveAndOpenReport() {
         if (!isNotNumberAndEmpty()) //Checking a field for is not number and empty
+        {
             if (isAllRadioButtonsOff(Cholesky, Gauss)) //Checking a radiobuttons for being selected
+            {
                 FillArrays();
+            }
+        }
         methodChlesky = new MethodChlesky(ArrayA, ArrayD);
-        if (methodChlesky.isZeroDiagonal())
+        if (methodChlesky.isZeroDiagonal()) {
             Message("Method Chlesky demands no zero from a main diagonal");
-        else if (methodChlesky.isZeroMinor())
+        } else if (methodChlesky.isZeroMinor()) {
             Message("Method Chlesky demands no zero from the minors of a main diagonal");
-        else {
+        } else {
             methodChlesky.DoMethod();
 
             String Head = "<html>\n" +
-                    "<head>\n" +
-                    "\t<title>Report</title>\n" +
-                    "</head>\n" +
-                    "<body>\n" +
-                    "<h1 align=\"center\">Method Cholesky</h1>\n" +
-                    "<hr>\n" +
-                    "<h2> The converted system of equations in the matrix</h2>" +
-                    "<pre>" + FillAreaByChlessky() + "</pre>" +
-                    "<h1 align=\"center\">Method Gauss Seidel</h1>\n" +
-                    "<hr>\n" +
-                    "<h2>Solution</h2>" +
-                    "<pre>" + solveEquationByGaussSeidel() + "</pre>" +
-                    "</body>\n" +
-                    "</html>";
+                "<head>\n" +
+                "\t<title>Report</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<h1 align=\"center\">Method Cholesky</h1>\n" +
+                "<hr>\n" +
+                "<h2> The converted system of equations in the matrix</h2>" +
+                "<pre>" + FillAreaByChlessky() + "</pre>" +
+                "<h1 align=\"center\">Method Gauss Seidel</h1>\n" +
+                "<hr>\n" +
+                "<h2>Solution</h2>" +
+                "<pre>" + solveEquationByGaussSeidel() + "</pre>" +
+                "</body>\n" +
+                "</html>";
 
             FileChooser fileChooser = getFileChooserHtmL("Save Report");
             File file;
@@ -138,7 +163,8 @@ public class Controller {
                         try {
                             Desktop.getDesktop().browse(file.toURI());
                         } catch (IOException e) {
-                            Message("Sorry, but can't open a theory about Chlesky.\nPlease, try one more time.");
+                            Message(
+                                "Sorry, but can't open a theory about Chlesky.\nPlease, try one more time.");
                         }
                     }
                 } catch (IOException e) {
@@ -148,23 +174,11 @@ public class Controller {
         }
     }
 
-
-    public static FileChooser getFileChooserHtmL(String title) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("."));
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("HTML files (*.html)", "*.html"));
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("All files (*.*)", "*.*"));
-        fileChooser.setTitle(title);
-        return fileChooser;
-    }
-
     private void display(Set<Displayer> set, TextArea area) {
         StringBuilder builder = new StringBuilder();
         for (Displayer displayer : set) {
             builder.append(displayer.display())
-                    .append("\n");
+                .append("\n");
         }
         area.setText(builder.toString());
     }
@@ -177,16 +191,18 @@ public class Controller {
             Double a = Double.parseDouble(from.getText());
             Double b = Double.parseDouble(to.getText());
             DihotomyMethodSolver methodSolver =
-                    new DihotomyMethodSolver(FunctionField.getText(),
-                            functionDisplayer, a, b);
+                new DihotomyMethodSolver(FunctionField.getText(),
+                    functionDisplayer, a, b);
             methodSolver.solve();
             LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
             displayers.add(functionDisplayer);
             display(displayers, Lab2Area);
         } else {
             Function2Displayer function2Displayer = new Function2Displayer();
-            CombinationMethodSolver methodSolver = new CombinationMethodSolver(FunctionField.getText(),
-                    function2Displayer, new FunctionInterval(Double.parseDouble(from.getText()), Double.parseDouble(to.getText())));
+            CombinationMethodSolver methodSolver = new CombinationMethodSolver(
+                FunctionField.getText(),
+                function2Displayer, new FunctionInterval(Double.parseDouble(from.getText()),
+                Double.parseDouble(to.getText())));
             methodSolver.solve();
             LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
             displayers.add(function2Displayer);
@@ -198,7 +214,7 @@ public class Controller {
     @FXML
     private void OpenTheoryAboutCholesky() {
         File file =
-                new File("src/sample/lab1/AboutMethodChlesky.htm");
+            new File("src/sample/lab1/AboutMethodChlesky.htm");
         try {
             Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e) {
@@ -215,7 +231,8 @@ public class Controller {
             Desktop.getDesktop().browse(file.toURI());
         } catch (IOException e) {
             e.printStackTrace();
-            Message("Sorry, but can't open a theory about Gauss Seidel.\nPlease, try one more time.");
+            Message(
+                "Sorry, but can't open a theory about Gauss Seidel.\nPlease, try one more time.");
         }
     }
 
@@ -293,39 +310,47 @@ public class Controller {
 
     //Method which checks a field for is not number and empty
     private boolean isNotNumberAndEmpty() {
-        if (variableX11.getText().isEmpty() || variableX12.getText().isEmpty() || variableX13.getText().isEmpty()) {
+        if (variableX11.getText().isEmpty() || variableX12.getText().isEmpty() || variableX13
+            .getText().isEmpty()) {
             Message("One (or more) fields is empty. Please, fill out them all.");
             return true;
         }
-        if (variableX21.getText().isEmpty() || variableX22.getText().isEmpty() || variableX23.getText().isEmpty()) {
+        if (variableX21.getText().isEmpty() || variableX22.getText().isEmpty() || variableX23
+            .getText().isEmpty()) {
             Message("One (or more) fields is empty. Please, fill out them all.");
             return true;
         }
-        if (variableX31.getText().isEmpty() || variableX32.getText().isEmpty() || variableX33.getText().isEmpty()) {
+        if (variableX31.getText().isEmpty() || variableX32.getText().isEmpty() || variableX33
+            .getText().isEmpty()) {
             Message("One (or more) fields is empty. Please, fill out them all.");
             return true;
         }
-        if (variableD1.getText().isEmpty() || variableD2.getText().isEmpty() || variableD3.getText().isEmpty()) {
+        if (variableD1.getText().isEmpty() || variableD2.getText().isEmpty() || variableD3.getText()
+            .isEmpty()) {
             Message("One (or more) fields is empty. Please, fill out them all.");
             return true;
         }
-        if (!variableX11.getText().matches("-?\\d+\\.?\\d*") || !variableX12.getText().matches("-?\\d+\\.?\\d*")
-                || !variableX13.getText().matches("-?\\d+\\.?\\d*")) {
+        if (!variableX11.getText().matches("-?\\d+\\.?\\d*") || !variableX12.getText()
+            .matches("-?\\d+\\.?\\d*")
+            || !variableX13.getText().matches("-?\\d+\\.?\\d*")) {
             Message("One (or more) fields is not number. Please, check them out.");
             return true;
         }
-        if (!variableX21.getText().matches("-?\\d+\\.?\\d*") || !variableX22.getText().matches("-?\\d+\\.?\\d*")
-                || !variableX23.getText().matches("-?\\d+\\.?\\d*")) {
+        if (!variableX21.getText().matches("-?\\d+\\.?\\d*") || !variableX22.getText()
+            .matches("-?\\d+\\.?\\d*")
+            || !variableX23.getText().matches("-?\\d+\\.?\\d*")) {
             Message("One (or more) fields is not number. Please, check them out.");
             return true;
         }
-        if (!variableX31.getText().matches("-?\\d+\\.?\\d*") || !variableX32.getText().matches("-?\\d+\\.?\\d*")
-                || !variableX33.getText().matches("-?\\d+\\.?\\d*")) {
+        if (!variableX31.getText().matches("-?\\d+\\.?\\d*") || !variableX32.getText()
+            .matches("-?\\d+\\.?\\d*")
+            || !variableX33.getText().matches("-?\\d+\\.?\\d*")) {
             Message("One (or more) fields is not number. Please, check them out.");
             return true;
         }
-        if (!variableD1.getText().matches("-?\\d+\\.?\\d*") || !variableD2.getText().matches("-?\\d+\\.?\\d*")
-                || !variableD3.getText().matches("-?\\d+\\.?\\d*")) {
+        if (!variableD1.getText().matches("-?\\d+\\.?\\d*") || !variableD2.getText()
+            .matches("-?\\d+\\.?\\d*")
+            || !variableD3.getText().matches("-?\\d+\\.?\\d*")) {
             Message("One (or more) fields is not number. Please, check them out.");
             return true;
         }
@@ -353,8 +378,9 @@ public class Controller {
     }
 
     private String round(double d) {
-        if (d == 0.0)
+        if (d == 0.0) {
             return String.valueOf(0);
+        }
         d = d * 100;
         int i = (int) d;
         d = (double) i;
@@ -364,15 +390,44 @@ public class Controller {
 
     @FXML
     public void solveEquationLab3(ActionEvent actionEvent) {
-        if(Lab3Mathod2.isSelected()) {
-            List<Double> matrixA = this.getMatrixALab3();
-            FaddeevLeVerrierDisplayer displayer = new FaddeevLeVerrierDisplayer();
-            FaddeevLeVerrier faddeevLeVerrier = new FaddeevLeVerrier(matrixA);
-            faddeevLeVerrier.solve(displayer);
-            lab3TextArea.setText(displayer.display());
-        }else{
+        Set<Displayer> displayers = new LinkedHashSet<>();
+        List<Double> matrixA = this.getMatrixALab3();
+        FaddeevLeVerrierDisplayer displayer = new FaddeevLeVerrierDisplayer();
+        FaddeevLeVerrier faddeevLeVerrier = new FaddeevLeVerrier(matrixA);
+        faddeevLeVerrier.solve(displayer);
+        if (Lab3Mathod2.isSelected()) {
 
+
+            displayers.add(displayer);
+        } else {
+
+            KrylovMethodSolver krylovMethodSolver = new KrylovMethodSolver(getMatrixLab3());
+            KrylovMethodDisplayer krylovMethodDisplayer = new KrylovMethodDisplayer(
+                krylovMethodSolver);
+            KrylovMethodSolverVector krylovMethodSolverVector =
+                new KrylovMethodSolverVector(getMatrixLab3(),
+                    krylovMethodSolver.getCoefficientsP());
+            KrylovMethodSolverVectorDisplayer vectorDisplayer =
+                new KrylovMethodSolverVectorDisplayer(krylovMethodSolverVector,
+                    krylovMethodSolver.getValues());
+            displayers.add(krylovMethodDisplayer);
+            displayers.add(vectorDisplayer);
         }
+        display(displayers, lab3TextArea);
+    }
+
+    private double[][] getMatrixLab3() {
+        double[][] matrixA = new double[3][3];
+        matrixA[0][0] = (Double.valueOf(lab3A11.getText()));
+        matrixA[0][1] = (Double.valueOf(lab3A12.getText()));
+        matrixA[0][2] = (Double.valueOf(lab3A13.getText()));
+        matrixA[1][0] = (Double.valueOf(lab3A21.getText()));
+        matrixA[1][1] = (Double.valueOf(lab3A22.getText()));
+        matrixA[1][2] = (Double.valueOf(lab3A23.getText()));
+        matrixA[2][0] = (Double.valueOf(lab3A31.getText()));
+        matrixA[2][1] = (Double.valueOf(lab3A32.getText()));
+        matrixA[2][2] = (Double.valueOf(lab3A33.getText()));
+        return matrixA;
     }
 
     private List<Double> getMatrixALab3() {
