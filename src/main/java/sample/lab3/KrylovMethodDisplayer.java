@@ -19,15 +19,16 @@ public class KrylovMethodDisplayer implements Displayer {
     private void setMatrixValuesReport(KrylovMethodSolver solver) {
         addReportAboutYToStringBuilder(solver.getY());
         addSystemOfEquationsToBuilder(solver.getY(), solver.getYn());
-        matrixValuesReport.append(Arrays.toString(solver.getValues()));
+        solver.setCoefficientsP();
         addLambdaEquationToBuilder(solver.getCoefficientsP());
+        matrixValuesReport.append(Arrays.toString(solver.getValues()));
     }
 
     private void addLambdaEquationToBuilder(double[] coefficientsP) {
         matrixValuesReport.append("\n");
         int k = coefficientsP.length - 1;
         matrixValuesReport.append("\u03bb^3 ");
-        for (int i = 1; i < coefficientsP.length; i++,k--) {
+        for (int i = 0; i < coefficientsP.length; i++,k--) {
             String formattedCell = String.format(" %s*\u03bb^%s ", coefficientsP[i],k);
             matrixValuesReport.append(formattedCell);
         }

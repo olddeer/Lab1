@@ -60,10 +60,14 @@ public class KrylovMethodSolver {
         yn = setNegativeValuesToArray
             (multiplicateMatrixNMToMatrixM(matrix, tmp));
     }
+
+    public void setCoefficientsP(){
+        coefficientsP = solveSystemEquationByGauss(y, yn);
+    }
     // поиск собственных значений
     public double[] getValues() {
-        coefficientsP = solveSystemEquationByGauss(y, yn);
-        Expression expression = new Expression(
+        setCoefficientsP();
+            Expression expression = new Expression(
             "solve(-x^3" + getMinusOrPlusCoefficient(coefficientsP[0]) + "*x^2"
                 + getMinusOrPlusCoefficient(coefficientsP[1]) + "*x"
                 + getMinusOrPlusCoefficient(coefficientsP[2]) + ",x,-100,100)",

@@ -24,6 +24,7 @@ public class KrylovMethodSolverVectorDisplayer implements Displayer {
                 matrixValuesReport.append(formattedCoefficient);
                 matrixValuesReport.append("\n");
             }
+            j++;
         }
     }
 
@@ -32,7 +33,7 @@ public class KrylovMethodSolverVectorDisplayer implements Displayer {
         matrixValuesReport.append("\n");
         for (int i=0;i<q.length;i++){
             for (int j=0;j<q.length;j++){
-                matrixValuesReport.append("[")
+                matrixValuesReport.append("q[")
                     .append(i)
                     .append(",")
                     .append(j)
