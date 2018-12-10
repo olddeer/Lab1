@@ -1,25 +1,28 @@
-package sample.lab4;
-
-import java.util.Arrays;
-import org.junit.Test;
+package sample.lab4.tests;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class TestInterpolateTableTest {
 
     @Test
     public void TestInterpolateTable() {
-        TestInterpolateTable testInterpolateTable =
-            new TestInterpolateTable(1,
+        TestInterpolateTableSolver testInterpolateTable =
+            new TestInterpolateTableSolver(
                 new double[]{7, 8, 9, 10, 11},
-                new double[]{5, 6, 7, 3, 12});
+                new double[]{1, 3.5, 11, 26.5, 53});
 
-        double[][] substractionTable = testInterpolateTable.fillSubstractionYValuesTable();
-        double[][] expectedSubstractionTable = {{5, 6, 7, 3, 12},{1,1,-4,9,0},{0,-5,13,0,0},{-5,18,0,0,0},{23,0,0,0,0}};
+        double[][] substractionTable = testInterpolateTable
+            .fillSubstractionYValuesTable();
 
-        assertArrayEquals(substractionTable,expectedSubstractionTable);
+        double[][] expectedSubstractionTable = {{1, 3.5, 11, 26.5, 53},
+            {2.5, 7.5, 15.5, 26.5, 0},
+            {5, 8, 11, 0, 0},
+            {3, 3, 0, 0, 0},
+            {0, 0, 0, 0, 0}};
+
+        assertArrayEquals(substractionTable, expectedSubstractionTable);
 
     }
 

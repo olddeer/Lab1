@@ -1,10 +1,17 @@
 package sample.lab4.tests;
 
-import sample.lab4.AbstractInterpolateMethod;
+import java.util.List;
+import sample.lab4.AbstractInterpolateMethodSolver;
+import sample.lab4.Variable;
 
-public class TestInterpolateTable extends AbstractInterpolateMethod {
+public class TestInterpolateTableSolver extends AbstractInterpolateMethodSolver {
 
-    public TestInterpolateTable(double h, double[] initialX, double[] initialY) {
-        super(h, initialX, initialY);
+    public TestInterpolateTableSolver(double[] initialX, double[] initialY) {
+        super (initialX, initialY);
+    }
+
+    @Override
+    public List<Variable> getCoefficientsOfPolinomByOrder() {
+        return null;
     }
 }

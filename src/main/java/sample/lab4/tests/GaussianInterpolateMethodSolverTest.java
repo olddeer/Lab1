@@ -1,20 +1,55 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+package sample.lab4.tests;
 
-import static org.junit.Assert.*;
+import java.util.List;
+import org.junit.Test;
+import sample.lab4.AbstractInterpolateMethodSolver;
+import sample.lab4.GaussianInterpolateMethodSolver;
+import sample.lab4.Polynomial;
+import sample.lab4.Variable;
 
-@RunWith(Arquillian.class)
 public class GaussianInterpolateMethodSolverTest {
 
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-            .addClass(sample.lab4.GaussianInterpolateMethodSolver.class)
-            .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    @Test
+    public void getCoefficientsOfPolinom() {
+        AbstractInterpolateMethodSolver solver =  new GaussianInterpolateMethodSolver(
+            new double[]{0.2, 0.25, -6, -5, -4},
+            new double[]{1.552, 1.6719, 1.7831, 1.8847, 1.9759,2.0563,2.125});
+       // double[] expectedParameters = {0.5,0.25,-0.125,0.0625};
+        List<Variable> coefficients = solver.getCoefficientsOfPolinomByOrder();
+        coefficients.forEach(System.out::println);
+        //assertArrayEquals(solver.getCoefficientsOfPolinomByOrder(), expectedParameters,0.0000001);
     }
 
+    @Test
+    public void getXMinuxX0DividedByHMultipleByY() {
+        GaussianInterpolateMethodSolver solver = new GaussianInterpolateMethodSolver(
+            new double[]{2, 4, 6, 8, 10},
+            new double[]{2, -2, 10, 20, 70});
+        Polynomial xMinuxX0DividedByHMultipleByY = solver
+            .getXMinuxX0DividedByHMultipleByY(7, 2);
+
+        List<Variable> variables2 = xMinuxX0DividedByHMultipleByY.getVariables();
+        //variables2.forEach(System.out::println);
+
+        Polynomial xMinuxX0DividedByHMultipleByY1 = solver
+            .getXMinuxX0DividedByHMultipleByY(3, 2);
+        List<Variable> coefficients1 = xMinuxX0DividedByHMultipleByY1.getVariables();
+        coefficients1.forEach(System.out::println);
+
+        Polynomial polynomial = xMinuxX0DividedByHMultipleByY
+            .multiplyPolynomial(xMinuxX0DividedByHMultipleByY1)
+            .multiplyPolynomial(xMinuxX0DividedByHMultipleByY1);
+
+          List<Variable> variables = polynomial.getVariables();
+
+         variables.forEach(System.out::println);
+
+        /*    Polynomial xMinuxX0DividedByHMultipleByY2 = solver
+            .getXMinuxX0DividedByHMultipleByY(5, 6);
+        List<Variable> coefficients = xMinuxX0DividedByHMultipleByY
+            .multiplyPolynomial(xMinuxX0DividedByHMultipleByY2
+                .multiplyPolynomial(solver
+                    .getXMinuxX0DividedByHMultipleByY(2,6))).getVariables();
+        coefficients.forEach(System.out::println);*/
+    }
 }
