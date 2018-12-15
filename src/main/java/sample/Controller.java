@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import sample.lab1.GaussSeidel;
 import sample.lab1.MethodChlesky;
@@ -113,6 +114,13 @@ public class Controller {
     public TextField lab4Y5TextField;
     public TextField lab4Tria_1Y4TextField;
     public Button lab4Solve;
+    public ToggleGroup lab5;
+    public TextField y0TextField;
+    public TextField x0TextField;
+    public TextField hTextField;
+    public TextField textResultAreaLab5;
+    public RadioButton picardRadioButton;
+    public RadioButton adamsRadioButton;
 
 
     double ArrayA[] = new double[variables * variables]; // Array of input data of the coefficients
@@ -549,6 +557,12 @@ public class Controller {
         double[][] substractionYValuesTable = displayer.getSubstractionYValuesTable();
         setTableViewLab4(substractionYValuesTable, getXValuesOfTableInputLab4());
         setCoefficientsLab4(coefficientsOfPolinomByOrder);
+
+    }
+
+    @FXML
+    public void solveDifferentialEquation(ActionEvent actionEvent) {
+
 
     }
 }
