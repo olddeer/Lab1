@@ -23,13 +23,13 @@ public strictfp class FunctionTwoVariable {
         if (!isBalanced(expression)) {
             parenthesize();
         } else {
-            System.out.println("Balanced parenthesized expression : " + expression);
+      //      System.out.println("Balanced parenthesized expression : " + expression);
         }
     }
 
     public double evaluate(double x, double y) throws UndefinedVariableException {
         String xp = expression.replace("x", x + "").replace("y", y + "").trim();
-        System.out.println("substituted value expression : " + xp);
+      //  System.out.println("substituted value expression : " + xp);
         Scanner inputStream = new Scanner(xp);
         Stack<String> operators = new Stack<>();
         Stack<Double> operands = new Stack<>();

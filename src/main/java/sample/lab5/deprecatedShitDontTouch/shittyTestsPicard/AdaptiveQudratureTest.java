@@ -15,7 +15,7 @@ public class AdaptiveQudratureTest {
     public void getNewtonCotesQuadratureIntegral()
         throws UnequalSpacedDataPointsException, UndefinedVariableException, InsufficientDataPointsException {
         AdaptiveQudrature ncqa = new AdaptiveQudrature();
-        FunctionOneVariable toIntegerate = new FunctionOneVariable("( 0 + sqrt ( x ) )");
+        FunctionOneVariable toIntegerate = new FunctionOneVariable("( pow ( x ) + sqrt ( x ) )");
         //System.out.println(ncqa.integrate());
         double newtonCotesQuadratureIntegral = AdaptiveQudrature
             .getNewtonCotesQuadratureIntegral(toIntegerate, new Double[]{0.0, 1.0, 2.0, 3.0});

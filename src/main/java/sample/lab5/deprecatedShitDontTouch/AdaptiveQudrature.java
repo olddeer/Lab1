@@ -43,7 +43,7 @@ public strictfp class AdaptiveQudrature extends Maths {
         }
 
         public double integrate() {
-            double area = 0.0;
+            double area;
             if ((datax.length - 1) % 3 == 0 && datax.length - 1 != 0) {
                 System.out.println("Using Simson's 3/8th rule !!");
                 double h = (datax[1] - datax[0]);
@@ -64,7 +64,7 @@ public strictfp class AdaptiveQudrature extends Maths {
 
                 area *= summation;
             } else if ((datax.length - 1) % 2 == 0 && datax.length - 1 != 0) {
-                System.out.println("Using Simson's 1/3rd rule !!");
+             //   System.out.println("Using Simson's 1/3rd rule !!");
                 double h = (datax[1] - datax[0]);
                 area = h / 3.0;
                 double summation = 0;
@@ -83,7 +83,7 @@ public strictfp class AdaptiveQudrature extends Maths {
                 summation = sum1 + sum2 + sum3;
                 area *= summation;
             } else {
-                System.out.println("Using Trapezoidal rule by default !!");
+           //     System.out.println("Using Trapezoidal rule by default !!");
                 double h = (datax[1] - datax[0]);
                 area = h / 2.0;
                 double summation = 0;
@@ -98,28 +98,6 @@ public strictfp class AdaptiveQudrature extends Maths {
                 area *= summation;
             }
             return area;
-        }
-
-        public double integrate(boolean forceTrapezoidal) {
-            if (!forceTrapezoidal) {
-                return integrate();
-            } else {
-                double area = 0.0;
-                System.out.println("forcefully using Trapezoidal rule !!");
-                double h = (datax[1] - datax[0]);
-                area = h / 2.0;
-                double summation = 0;
-                //calculate summation here
-                double sum1 = datay[0] + datay[datay.length - 1];
-                double sum2 = 0;
-                for (int i = 1; i < datax.length - 1; i++) {
-                    sum2 += datay[i];
-                }
-                sum2 *= 2.0;
-                summation = sum1 + sum2;
-                area *= summation;
-                return area;
-            }
         }
     }
 

@@ -16,13 +16,13 @@ public strictfp class PicardsDifferentialEquationSolver extends Maths  {
      * @param y initial value y0
      * @param f the function in two variable
      */
-    private PicardsDifferentialEquationSolver(double x, double y, FunctionTwoVariable f) {
+    public PicardsDifferentialEquationSolver(double x, double y, FunctionTwoVariable f) {
         x0 = x;
         y0 = y;
         func = f;
     }
 
-    private double solveForX(double x, double h) throws FunctionOneVariable.UndefinedVariableException, AdaptiveQudrature.InsufficientDataPointsException, AdaptiveQudrature.UnequalSpacedDataPointsException {
+    public double solveForX(double x, double h) throws FunctionOneVariable.UndefinedVariableException, AdaptiveQudrature.InsufficientDataPointsException, AdaptiveQudrature.UnequalSpacedDataPointsException {
 
         Double[] d = new Double[(int) ((x - x0) / h) + 1];
         double y = roundTo10Digits(y0);
@@ -40,7 +40,7 @@ public strictfp class PicardsDifferentialEquationSolver extends Maths  {
             }
             if (yprev == y) {
                 flag = true;
-                //break;
+              //  break;
             }
             System.out.println("(x + " + n + "h) = " + roundTo10Digits(roundTo10Digits(x) + roundTo10Digits(n * h)) + ", (y + Δy) = " + roundTo10Digits(y));
             n++;
