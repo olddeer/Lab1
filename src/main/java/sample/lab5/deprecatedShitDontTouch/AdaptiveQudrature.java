@@ -1,4 +1,4 @@
-package sample.lab5;
+package sample.lab5.deprecatedShitDontTouch;
 
 public strictfp class AdaptiveQudrature extends Maths {
 

@@ -1,11 +1,11 @@
-package sample.lab5.shittyTestsPicard;
+package sample.lab5.deprecatedShitDontTouch.shittyTestsPicard;
 
 import org.junit.Test;
-import sample.lab5.AdaptiveQudrature.InsufficientDataPointsException;
-import sample.lab5.AdaptiveQudrature.UnequalSpacedDataPointsException;
-import sample.lab5.FunctionOneVariable.UndefinedVariableException;
-import sample.lab5.FunctionTwoVariable;
-import sample.lab5.PicardsDifferentialEquationSolver;
+import sample.lab5.deprecatedShitDontTouch.AdaptiveQudrature.InsufficientDataPointsException;
+import sample.lab5.deprecatedShitDontTouch.AdaptiveQudrature.UnequalSpacedDataPointsException;
+import sample.lab5.deprecatedShitDontTouch.FunctionOneVariable.UndefinedVariableException;
+import sample.lab5.deprecatedShitDontTouch.FunctionTwoVariable;
+import sample.lab5.deprecatedShitDontTouch.PicardsDifferentialEquationSolver;
 
 
 public class PicardsDifferentialEquationSolverTest {

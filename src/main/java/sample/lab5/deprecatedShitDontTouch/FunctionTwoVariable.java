@@ -1,8 +1,8 @@
-package sample.lab5;
+package sample.lab5.deprecatedShitDontTouch;
 
-import static sample.lab5.FunctionOneVariable.getOperation;
-import static sample.lab5.FunctionOneVariable.getRemovedSpaces;
-import static sample.lab5.FunctionOneVariable.isOperate;
+import static sample.lab5.deprecatedShitDontTouch.FunctionOneVariable.getOperation;
+import static sample.lab5.deprecatedShitDontTouch.FunctionOneVariable.getRemovedSpaces;
+import static sample.lab5.deprecatedShitDontTouch.FunctionOneVariable.isOperate;
 
 import java.util.Scanner;
 import java.util.Stack;

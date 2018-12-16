@@ -1,10 +1,8 @@
-package sample.lab5.shittyTestsPicard;
-
-import static org.junit.Assert.*;
+package sample.lab5.deprecatedShitDontTouch.shittyTestsPicard;
 
 import org.junit.Test;
-import sample.lab5.FunctionTwoVariable;
-import sample.lab5.FunctionTwoVariable.UndefinedVariableException;
+import sample.lab5.deprecatedShitDontTouch.FunctionTwoVariable;
+import sample.lab5.deprecatedShitDontTouch.FunctionTwoVariable.UndefinedVariableException;
 
 public class FunctionTwoVariableTest {
 

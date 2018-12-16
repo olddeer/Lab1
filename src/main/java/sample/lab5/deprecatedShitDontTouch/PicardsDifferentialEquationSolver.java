@@ -1,4 +1,4 @@
-package sample.lab5;
+package sample.lab5.deprecatedShitDontTouch;
 
 import java.util.Arrays;
 

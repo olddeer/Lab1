@@ -1,5 +1,9 @@
 package sample;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.log;
+import static java.lang.StrictMath.pow;
+
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -36,6 +41,8 @@ import sample.lab3.KrylovMethodSolverVector;
 import sample.lab3.KrylovMethodSolverVectorDisplayer;
 import sample.lab4.GaussianInterpolateMethodSolver;
 import sample.lab4.InterpolateMethodDisplayer;
+import sample.lab5.PicardDisplayer;
+import sample.lab5.TypeOfPicardDifferentialEquationSolver;
 
 public class Controller {
 
@@ -118,10 +125,11 @@ public class Controller {
     public TextField y0TextField;
     public TextField x0TextField;
     public TextField hTextField;
-    public TextField textResultAreaLab5;
+    public TextArea textResultAreaLab5;
     public RadioButton picardRadioButton;
     public RadioButton adamsRadioButton;
-
+    public TextField bTextField;
+    private final double H = 0.01;
 
     double ArrayA[] = new double[variables * variables]; // Array of input data of the coefficients
     double ArrayD[] = new double[variables]; // Array of input data
@@ -562,7 +570,23 @@ public class Controller {
 
     @FXML
     public void solveDifferentialEquation(ActionEvent actionEvent) {
+        Function<Double,Double> function = x -> 1 + (pow(x,3)/81)+(pow(x,2)/6)
+            +(4*x)/3+(x/3+1.0/2)*log(x)*log(x)+((-x*x)/9-(4*x)/3)*log(x)-log(x) - 1.5;
+        double x0 = Double.parseDouble(x0TextField.getText());
+        double y0 = Double.parseDouble(y0TextField.getText());
+        double b = Double.parseDouble(bTextField.getText());
+        double h = Double.parseDouble(hTextField.getText());
+        Set<Displayer> displayers = new LinkedHashSet<>();
+        if(picardRadioButton.isSelected()){
+                TypeOfPicardDifferentialEquationSolver solver
+                    = new TypeOfPicardDifferentialEquationSolver(function,x0,y0,b,h);
+            PicardDisplayer displayer = new PicardDisplayer(solver);
+            displayers.add(displayer);
+            }
+            else{
 
+        }
+        display(displayers,textResultAreaLab5);
 
     }
 }
